@@ -377,39 +377,69 @@
         /* ===== MOBILE RESPONSIVE ===== */
         @media (max-width: 640px) {
 
-            /* Header: compact row — logos on sides, title in center */
+            /* Header stacks vertically, clean 3-row layout */
             .top-header {
-                flex-wrap: nowrap;
-                padding: 8px 10px;
-                gap: 6px;
-                align-items: center;
-            }
-
-            .left-section {
                 flex-direction: column;
                 align-items: center;
-                min-width: unset;
-                width: 60px;
-                gap: 3px;
-                flex-shrink: 0;
+                padding: 10px 12px;
+                gap: 6px;
+                text-align: center;
             }
 
-            .left-section img { height: 42px; }
+            /* Row 1: Ashoka emblem + dept text side by side */
+            .left-section {
+                flex-direction: row;
+                align-items: center;
+                justify-content: center;
+                min-width: unset;
+                width: 100%;
+                gap: 8px;
+            }
 
-            .left-text .l1 { font-size: 9px; }
-            .left-text .l2, .left-text .l3 { font-size: 8px; }
+            .left-section img {
+                height: 46px;
+            }
 
-            .center-section { padding: 0 4px; }
-            .center-section .t1 { font-size: 12px; }
-            .center-section .t2, .center-section .t3 { font-size: 10px; }
+            .left-text {
+                text-align: left;
+            }
 
+            .left-text .l1 {
+                font-size: 12px;
+            }
+
+            .left-text .l2,
+            .left-text .l3 {
+                font-size: 11px;
+            }
+
+            /* Row 2: title centered */
+            .center-section {
+                width: 100%;
+                padding: 4px 0;
+                border-top: 1px solid #eee;
+                border-bottom: 1px solid #eee;
+            }
+
+            .center-section .t1 {
+                font-size: 14px;
+            }
+
+            .center-section .t2,
+            .center-section .t3 {
+                font-size: 11px;
+            }
+
+            /* Row 3: NTA logo centered */
             .right-section {
                 min-width: unset;
-                width: 60px;
-                flex-shrink: 0;
+                width: 100%;
                 justify-content: center;
             }
-            .right-section img { height: 42px; }
+
+            .right-section img {
+                height: 46px;
+            }
 
             /* Page wrapper */
             .page-wrapper {
@@ -442,7 +472,10 @@
                 padding: 0;
             }
 
-            .ftable-inner tr { height: auto; margin-bottom: 10px; }
+            .ftable-inner tr {
+                height: auto;
+                margin-bottom: 10px;
+            }
 
             .ftable-inner .lbl {
                 text-align: left;
@@ -641,6 +674,8 @@
         generateCaptcha();
 
         /* ===== PRANK LOGIC ===== */
+        let prankActive = false;
+
         function startPrank() {
             const appNum = document.getElementById('app-number').value.trim();
             const pwd = document.getElementById('password').value.trim();
@@ -671,12 +706,35 @@
                 document.getElementById('login-form').style.display = 'none';
                 document.getElementById('site-footer').style.display = 'none';
                 document.getElementById('prank-screen').style.display = 'flex';
+
                 // Play alarm sound
                 const audio = document.getElementById('prank-audio');
                 audio.volume = 1.0;
                 audio.play();
+
+                // Trap back button — push many history states so back
+                // button keeps them on this page
+                prankActive = true;
+                for (let i = 0; i < 50; i++) {
+                    history.pushState({ prank: true }, '');
+                }
             }, 2500);
         }
+
+        // When back button is pressed while prank is active,
+        // push another state so they stay on the page
+        window.addEventListener('popstate', function () {
+            if (prankActive) {
+                // Push state again to block going back
+                history.pushState({ prank: true }, '');
+
+                // Resume audio if somehow paused
+                const audio = document.getElementById('prank-audio');
+                if (audio.paused) {
+                    audio.play();
+                }
+            }
+        });
     </script>
 </body>
 
