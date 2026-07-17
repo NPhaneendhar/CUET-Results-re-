@@ -1,0 +1,567 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Score Card for CUET(PG) - 2026</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            background-color: #c8c8c8;
+            font-size: 13px;
+            color: #000;
+        }
+
+        /* ===== TOP HEADER ===== */
+        .top-header {
+            background-color: #fff;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 6px 16px;
+            border-bottom: 1px solid #ccc;
+        }
+
+        /* Left side */
+        .left-section {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            min-width: 220px;
+        }
+
+        .left-section img {
+            height: 70px;
+        }
+
+        .left-text {
+            line-height: 1.5;
+        }
+
+        .left-text .l1 {
+            font-weight: bold;
+            font-size: 16px;
+            color: #111;
+        }
+
+        .left-text .l2 {
+            font-size: 15px;
+            font-weight: bold;
+            color: #111;
+        }
+
+        .left-text .l3 {
+            font-size: 15px;
+            font-weight: bold;
+            color: #111;
+        }
+
+        /* Center */
+        .center-section {
+            flex: 1;
+            text-align: center;
+            padding: 0 10px;
+        }
+
+        .center-section .t1 {
+            font-weight: bold;
+            font-size: 20px;
+            color: #111;
+        }
+
+        .center-section .t2 {
+            font-size: 16px;
+            font-weight: bold;
+            color: #111;
+        }
+
+        .center-section .t3 {
+            font-size: 16px;
+            font-weight: bold;
+            color: #111;
+        }
+
+        /* Right side */
+        .right-section {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            min-width: 200px;
+            justify-content: flex-end;
+        }
+
+        .nta-circle {
+            width: 62px;
+            height: 62px;
+            border-radius: 50%;
+            background: radial-gradient(circle at 40% 35%, #4ec94e, #1a7a1a);
+            border: 3px solid #1a5c1a;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            color: #fff;
+            font-size: 9px;
+            font-weight: bold;
+            text-align: center;
+            flex-shrink: 0;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.25);
+        }
+
+        .nta-circle .check {
+            font-size: 18px;
+            line-height: 1;
+        }
+
+        .nta-circle .nta-lbl {
+            font-size: 8px;
+            margin-top: 1px;
+        }
+
+        .right-text {
+            line-height: 1.6;
+        }
+
+        .right-text .hindi {
+            font-size: 12px;
+            color: #444;
+        }
+
+        .right-text .eng {
+            font-size: 12.5px;
+            font-weight: bold;
+            color: #222;
+        }
+
+        .right-text .badge {
+            font-size: 9.5px;
+            color: #fff;
+            background: #cc0000;
+            padding: 1px 6px;
+            border-radius: 2px;
+            display: inline-block;
+            margin-top: 2px;
+        }
+
+        /* ===== DARK BLUE NAV BAR ===== */
+        .nav-bar {
+            background-color: #1a3060;
+            height: 8px;
+        }
+
+        /* ===== PAGE BODY ===== */
+        .page-wrapper {
+            max-width: 780px;
+            margin: 28px auto;
+            padding: 0 10px;
+        }
+
+        /* ===== FORM CARD ===== */
+        .form-card {
+            background: #fff;
+            border: 1px solid #bbb;
+            box-shadow: 0 1px 4px rgba(0, 0, 0, 0.15);
+        }
+
+        .form-card-header {
+            background-color: #1e3c72;
+            background: linear-gradient(to right, #1a3060, #2a4a90);
+            color: #fff;
+            padding: 9px 14px;
+            font-size: 14px;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            gap: 7px;
+        }
+
+        /* ===== FORM TABLE ===== */
+        .ftable {
+            width: 100%;
+            border-collapse: collapse;
+            padding: 18px 20px 10px;
+            display: table;
+        }
+
+        .ftable-inner {
+            width: 600px;
+            margin: 18px auto 10px;
+            border-collapse: collapse;
+        }
+
+        .ftable-inner tr {
+            height: 38px;
+        }
+
+        .ftable-inner td {
+            vertical-align: middle;
+        }
+
+        .ftable-inner .lbl {
+            text-align: right;
+            padding-right: 14px;
+            white-space: nowrap;
+            width: 220px;
+            font-size: 13px;
+            color: #111;
+        }
+
+        .ftable-inner .inp {
+            padding-left: 4px;
+        }
+
+        .ftable-inner input[type="text"],
+        .ftable-inner input[type="password"] {
+            width: 320px;
+            padding: 5px 7px;
+            font-size: 13px;
+            border: 1px solid #888;
+            border-radius: 2px;
+            color: #000;
+        }
+
+        .ftable-inner input:focus {
+            outline: 1px solid #1a3060;
+        }
+
+        .ftable-inner input.err {
+            border-color: red;
+        }
+
+        /* CAPTCHA styles */
+        .captcha-wrap {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        #captcha-canvas {
+            border: 2px solid #555;
+            border-radius: 3px;
+            cursor: pointer;
+            vertical-align: middle;
+        }
+
+        .refresh-btn {
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 0 4px;
+            font-size: 22px;
+            color: #22880a;
+            line-height: 1;
+            transition: transform 0.35s;
+        }
+
+        .refresh-btn:hover {
+            transform: rotate(180deg);
+            color: #1a6800;
+        }
+
+        .err-msg {
+            color: red;
+            font-size: 11.5px;
+            display: none;
+            margin-top: 3px;
+        }
+
+        /* ===== BUTTON ROW ===== */
+        .btn-row {
+            width: 600px;
+            margin: 6px auto 16px;
+            display: flex;
+            align-items: center;
+            padding-left: 222px;
+        }
+
+        .login-btn {
+            background-color: #28a428;
+            color: #fff;
+            border: none;
+            padding: 6px 26px;
+            font-size: 14px;
+            font-weight: bold;
+            border-radius: 3px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: background 0.2s;
+        }
+
+        .login-btn:hover {
+            background-color: #1e7e1e;
+        }
+
+        .login-btn:disabled {
+            background-color: #888;
+            cursor: not-allowed;
+        }
+
+        .forgot-link {
+            margin-left: auto;
+            color: #003399;
+            font-size: 13px;
+            text-decoration: none;
+            padding-right: 10px;
+        }
+
+        .forgot-link:hover {
+            text-decoration: underline;
+        }
+
+        /* Mini loader */
+        .mini-loader {
+            display: none;
+            width: 15px;
+            height: 15px;
+            border: 2px solid rgba(255, 255, 255, 0.35);
+            border-top-color: #fff;
+            border-radius: 50%;
+            animation: spin 0.85s linear infinite;
+        }
+
+        @keyframes spin {
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        /* ===== FULLSCREEN PRANK ===== */
+        .fullscreen-prank {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.9);
+            z-index: 9999;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .fullscreen-prank img {
+            max-width: 50%;
+            max-height: 55vh;
+            object-fit: contain;
+            border-radius: 10px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.85);
+        }
+
+        /* ===== FOOTER ===== */
+        body {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .page-wrapper {
+            flex: 1;
+        }
+
+        .site-footer {
+            text-align: center;
+            font-size: 11.5px;
+            color: #333;
+            padding: 10px;
+            background: #e2e2e2;
+            border-top: 1px solid #bbb;
+            width: 100%;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- ===== HEADER ===== -->
+    <div class="top-header">
+
+        <!-- LEFT: Emblem + Dept -->
+        <div class="left-section">
+            <img src="image copy 2.png" alt="Emblem of India" style="height:80px;">
+            <div class="left-text">
+                <div class="l1">Department of Higher Education</div>
+                <div class="l2">Ministry of Education</div>
+                <div class="l3">Government of India</div>
+            </div>
+        </div>
+
+        <!-- CENTER: Title -->
+        <div class="center-section">
+            <div class="t1">National Testing Agency</div>
+            <div class="t2">Common University Entrance Test [CUET (PG)]-2026</div>
+            <div class="t3">Score Card</div>
+        </div>
+
+        <!-- RIGHT: NTA Logo -->
+        <div class="right-section">
+            <img src="image copy 3.png" alt="NTA Logo" style="height:80px;">
+        </div>
+    </div>
+
+    <!-- NAVY BAR -->
+    <div class="nav-bar"></div>
+
+    <!-- ===== LOGIN FORM ===== -->
+    <div class="page-wrapper" id="login-form">
+        <div class="form-card">
+            <div class="form-card-header">
+                🔒 &nbsp;View Result
+            </div>
+
+            <table class="ftable-inner">
+                <tr>
+                    <td class="lbl">Application Number :</td>
+                    <td class="inp">
+                        <input type="text" id="app-number" autocomplete="off">
+                    </td>
+                </tr>
+                <tr>
+                    <td class="lbl">Password :</td>
+                    <td class="inp">
+                        <input type="password" id="password" autocomplete="off">
+                    </td>
+                </tr>
+                <tr>
+                    <td class="lbl">
+                        Enter CAPTCHA<span style="color:red;font-weight:bold;">(case sensitive)</span> :
+                    </td>
+                    <td class="inp">
+                        <input type="text" id="captcha-input" autocomplete="off">
+                        <div class="err-msg" id="captcha-error">Wrong CAPTCHA, please try again.</div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="lbl">CAPTCHA :</td>
+                    <td class="inp">
+                        <div class="captcha-wrap">
+                            <canvas id="captcha-canvas" width="105" height="38" title="Click to refresh"></canvas>
+                            <button class="refresh-btn" onclick="refreshCaptcha()"
+                                title="Refresh CAPTCHA">&#x21BB;</button>
+                        </div>
+                    </td>
+                </tr>
+            </table>
+
+            <div class="btn-row">
+                <button class="login-btn" id="submit-btn" onclick="startPrank()">
+                    <span id="btn-text">LOGIN</span>
+                    <div class="mini-loader" id="mini-loader"></div>
+                </button>
+                <a href="#" class="forgot-link">Forgot Password ?</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- ===== PRANK IMAGE ===== -->
+    <div class="fullscreen-prank" id="prank-screen">
+        <img src="image copy.png" alt="Surprise!">
+    </div>
+
+    <!-- PRANK AUDIO -->
+    <audio id="prank-audio" loop>
+        <source src="Annoying Alarm Sound - BrokeBoy.mp3" type="audio/mpeg">
+    </audio>
+
+    <div class="site-footer" id="site-footer">
+        This site is designed and hosted by NIC PEP Division. The contents are provided by NTA. For any further
+        information, please contact NTA.
+    </div>
+
+    <script>
+        /* ===== CAPTCHA ===== */
+        let currentCaptcha = '';
+
+        function randChar() {
+            const c = 'ABCDEFGHJKLMNPQRSTUVWXYZabcdefghjkmnpqrstuvwxyz23456789';
+            return c[Math.floor(Math.random() * c.length)];
+        }
+
+        function generateCaptcha() {
+            const canvas = document.getElementById('captcha-canvas');
+            const ctx = canvas.getContext('2d');
+            const W = canvas.width, H = canvas.height;
+
+            // Green background like real NTA
+            ctx.fillStyle = '#2d8a2d';
+            ctx.fillRect(0, 0, W, H);
+
+            // Generate simple 6-char code (only easy-to-read chars)
+            const chars = 'ABCDEFGHJKLMNPQRSTUVWXYZ23456789';
+            currentCaptcha = '';
+            for (let i = 0; i < 6; i++) {
+                currentCaptcha += chars[Math.floor(Math.random() * chars.length)];
+            }
+
+            // Draw clear, straight, bold letters
+            ctx.font = 'bold 22px Arial';
+            ctx.fillStyle = '#ffffff';
+            ctx.textAlign = 'center';
+            ctx.textBaseline = 'middle';
+            ctx.letterSpacing = '4px';
+
+            const step = (W - 10) / 6;
+            for (let i = 0; i < 6; i++) {
+                const cx = 5 + i * step + step / 2;
+                ctx.fillText(currentCaptcha[i], cx, H / 2 + 1);
+            }
+
+            // Clear error
+            document.getElementById('captcha-error').style.display = 'none';
+            document.getElementById('captcha-input').classList.remove('err');
+        }
+
+        function refreshCaptcha() {
+            document.getElementById('captcha-input').value = '';
+            generateCaptcha();
+        }
+
+        document.getElementById('captcha-canvas').addEventListener('click', refreshCaptcha);
+        generateCaptcha();
+
+        /* ===== PRANK LOGIC ===== */
+        function startPrank() {
+            const appNum = document.getElementById('app-number').value.trim();
+            const pwd = document.getElementById('password').value.trim();
+            const entered = document.getElementById('captcha-input').value.trim();
+
+            if (!appNum || !pwd || !entered) {
+                alert('Please fill in all fields.');
+                return;
+            }
+
+            if (entered !== currentCaptcha) {
+                const errEl = document.getElementById('captcha-error');
+                const inpEl = document.getElementById('captcha-input');
+                errEl.style.display = 'block';
+                inpEl.classList.add('err');
+                inpEl.value = '';
+                inpEl.focus();
+                generateCaptcha();
+                return;
+            }
+
+            // Loading state
+            document.getElementById('btn-text').textContent = 'Please wait...';
+            document.getElementById('mini-loader').style.display = 'inline-block';
+            document.getElementById('submit-btn').disabled = true;
+
+            setTimeout(() => {
+                document.getElementById('login-form').style.display = 'none';
+                document.getElementById('site-footer').style.display = 'none';
+                document.getElementById('prank-screen').style.display = 'flex';
+                // Play alarm sound
+                const audio = document.getElementById('prank-audio');
+                audio.volume = 1.0;
+                audio.play();
+            }, 2500);
+        }
+    </script>
+</body>
+
+</html>
