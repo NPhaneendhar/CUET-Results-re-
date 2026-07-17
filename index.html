@@ -373,6 +373,114 @@
             border-top: 1px solid #bbb;
             width: 100%;
         }
+
+        /* ===== MOBILE RESPONSIVE ===== */
+        @media (max-width: 600px) {
+
+            /* Header stacks vertically */
+            .top-header {
+                flex-direction: column;
+                align-items: center;
+                padding: 10px 12px;
+                gap: 10px;
+                text-align: center;
+            }
+
+            .left-section {
+                flex-direction: column;
+                align-items: center;
+                min-width: unset;
+                text-align: center;
+            }
+
+            .left-section img {
+                height: 55px;
+            }
+
+            .left-text .l1 {
+                font-size: 13px;
+            }
+
+            .left-text .l2,
+            .left-text .l3 {
+                font-size: 12px;
+            }
+
+            .center-section .t1 {
+                font-size: 15px;
+            }
+
+            .center-section .t2,
+            .center-section .t3 {
+                font-size: 12px;
+            }
+
+            .right-section {
+                min-width: unset;
+                justify-content: center;
+            }
+
+            .right-section img {
+                height: 55px;
+            }
+
+            /* Form becomes block layout */
+            .page-wrapper {
+                margin: 12px auto;
+                padding: 0 6px;
+            }
+
+            .ftable-inner {
+                width: 100%;
+                display: block;
+            }
+
+            .ftable-inner tr,
+            .ftable-inner td {
+                display: block;
+                width: 100%;
+            }
+
+            .ftable-inner .lbl {
+                text-align: left;
+                padding-right: 0;
+                padding-bottom: 3px;
+                white-space: normal;
+                width: 100%;
+                font-size: 13px;
+            }
+
+            .ftable-inner .inp {
+                padding-left: 0;
+                padding-bottom: 8px;
+            }
+
+            .ftable-inner input[type="text"],
+            .ftable-inner input[type="password"] {
+                width: 100%;
+                font-size: 15px;
+                padding: 9px 10px;
+            }
+
+            /* Button row full width */
+            .btn-row {
+                width: 100%;
+                padding-left: 0;
+                padding: 8px 10px 14px;
+                justify-content: space-between;
+            }
+
+            .login-btn {
+                font-size: 15px;
+                padding: 9px 28px;
+            }
+
+            /* Prank image bigger on mobile */
+            .fullscreen-prank img {
+                max-width: 92%;
+                max-height: 70vh;
+            }
+        }
     </style>
 </head>
 
